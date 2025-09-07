@@ -5,7 +5,9 @@
 Para instalar o Java JDK 17, execute os seguintes comandos:
 
 ```bash
-sudo apt update && sudo apt install openjdk-17-jdk -y
+sudo apt update
+sudo apt install fontconfig openjdk-21-jre
+java -version
 ```
 
 #### Jenkins
