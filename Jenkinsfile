@@ -1,44 +1,35 @@
-pipeline {
-    agent any
+stage('Deploy to Kubernetes') {
+    steps {
+        script {
+            // Cria kubeconfig temporário no workspace
+            writeFile file: 'kubeconfig', text: """
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    server: https://<IP_DO_CLUSTER>:6443
+    insecure-skip-tls-verify: true
+  name: jenkins-cluster
+contexts:
+- context:
+    cluster: jenkins-cluster
+    user: jenkins-user
+  name: jenkins-context
+current-context: jenkins-context
+users:
+- name: jenkins-user
+  user:
+    token: ${credentials('jenkins-k8s-token')}
+"""
 
-    environment {
-        REGISTRY = "joelfernandes01"
-        IMAGE = "guia-jenkins"
-        TAG = "latest"
+            // Aponta kubectl para esse kubeconfig temporário
+            env.KUBECONFIG = "${env.WORKSPACE}/kubeconfig"
+
+            sh '''
+                echo ">>> Aplicando manifestos no Kubernetes..."
+                kubectl apply -f k8s/deployment.yaml
+                kubectl apply -f k8s/service.yaml
+            '''
+        }
     }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh '''
-                            echo ">>> Logando no DockerHub..."
-                            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-
-                            echo ">>> Construindo imagem Docker..."
-                            docker build -t $REGISTRY/$IMAGE:$TAG ./src
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    sh '''
-                        echo ">>> Enviando imagem para o DockerHub..."
-                        docker push $REGISTRY/$IMAGE:$TAG
-                    '''
-                }
-            }
-        }
-  }
 }
