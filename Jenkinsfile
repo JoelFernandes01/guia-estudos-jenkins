@@ -52,7 +52,7 @@ services:
     image: nginx:latest
     container_name: nginx_jenkins
     ports:
-      - "8081:80"
+      - "80:80"
     restart: always
 """
 
