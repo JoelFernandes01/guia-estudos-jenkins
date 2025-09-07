@@ -21,7 +21,7 @@ pipeline {
                         sh '''
                             echo ">>> Logando no DockerHub..."
                             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                            
+
                             echo ">>> Construindo imagem Docker..."
                             docker build -t $REGISTRY/$IMAGE:$TAG .
                         '''
