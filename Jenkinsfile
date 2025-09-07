@@ -59,8 +59,8 @@ services:
                     // Executa o docker-compose
                     sh '''
                         echo ">>> Rodando NGINX via Docker Compose..."
-                        docker-compose down || true
-                        docker-compose up -d
+                        docker compose down || true
+                        docker compose up -d
                         docker ps
                     '''
                 }
