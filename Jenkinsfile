@@ -20,11 +20,5 @@ pipeline {
                }
              } 
          }
- 
-#       stage('Deploy no Kubernetes'){
-#         steps {
-#           sh 'echo "Executando o comando kubectl appy"'
-#         }
-#       }
      }
    }
