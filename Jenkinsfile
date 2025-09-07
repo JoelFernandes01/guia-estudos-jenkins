@@ -23,7 +23,7 @@ pipeline {
                             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 
                             echo ">>> Construindo imagem Docker..."
-                            docker build -t $REGISTRY/$IMAGE:$TAG .
+                            docker build -t $REGISTRY/$IMAGE:$TAG ./src
                         '''
                     }
                 }
