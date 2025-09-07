@@ -40,19 +40,5 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    withKubeConfig([credentialsId: 'kubeconfig']) {
-                        sh '''
-                            echo ">>> Aplicando manifestos no Kubernetes..."
-                            kubectl apply -f k8s/deployment.yaml
-                            kubectl apply -f k8s/service.yaml
-                        '''
-                    }
-                }
-            }
-        }
-    }
+  }
 }
