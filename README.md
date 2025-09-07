@@ -6,7 +6,7 @@ Para instalar o Java JDK 17, execute os seguintes comandos:
 
 ```bash
 sudo apt update
-sudo apt install fontconfig openjdk-21-jre
+sudo apt install fontconfig openjdk-21-jre -y
 java -version
 ```
 
