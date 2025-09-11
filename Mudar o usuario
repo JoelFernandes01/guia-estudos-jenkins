@@ -1,0 +1,16 @@
+No meu caso , o usuário do linux é o ubuntu
+Pare o serviço do jenkins
+sudo systemctl stop jenkins
+Edite o arquivo 
+sudo vim /lib/systemd/system/jenkins.service 
+# Unix account that runs the Jenkins daemon
+# Be careful when you change this, as you need to update the permissions of
+# $JENKINS_HOME, $JENKINS_LOG, and (if you have already run Jenkins)
+# $JENKINS_WEBROOT.
+User=ubuntu
+Group=ubuntu
+Modifique os direitos na pasta do jenkins
+sudo chown -R ubuntu:ubuntu /var/lib/jenkins /var/cache/jenkins /var/log/jenkins
+Realize o reload do daemon e inicie o serviço do jenkins
+sudo systemctl daemon-reload 
+sudo systemctl start jenkins
