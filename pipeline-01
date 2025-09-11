@@ -1,0 +1,45 @@
+Preparar o Jenkins para acessar o GitHub via SSH
+Acesse o Jenkins no navegador:
+Vá em Manage Jenkins → Credentials → System → Global credentials (unrestricted) → Add Credentials.
+Configure:
+Kind: SSH Username with private key
+Username: git
+Private Key: Escolha Enter directly e cole o conteúdo da sua chave privada (~/.ssh/id_ed25519)
+ID: github-ssh (ou outro nome fácil de lembrar)
+Description: Conexão SSH GitHub
+Agora o Jenkins sabe como autenticar no GitHub via SSH.
+
+Criar um job de teste simples
+No dashboard do Jenkins, clique em New Item.
+Nomeie, por exemplo, Teste-GitHub.
+Escolha Pipeline → clique em OK
+
+Configurar a pipeline para clonar o repositório
+Na seção Pipeline → Definition → Pipeline script, cole o seguinte:
+pipeline {
+    agent any
+
+    environment {
+        SSH_CREDENTIAL = 'github-ssh'  // o ID da credencial que você cadastrou
+        REPO_URL = 'git@github.com:JoelFernandes01/teste-jenkins.git'  // repositório de teste
+    }
+
+    stages {
+        stage('Clonar repositório') {
+            steps {
+                sshagent([env.SSH_CREDENTIAL]) {
+                    sh '''
+                        echo "Testando clone do repositório GitHub..."
+                        git clone ${REPO_URL} repo-teste || (cd repo-teste && git pull)
+                        ls -la repo-teste
+                    '''
+                }
+            }
+        }
+    }
+}
+
+Testar manualmente
+Salve a pipeline.
+Clique em Build Now.
+Na saída (Console Output), você deve ver algo como:
