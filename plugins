@@ -1,0 +1,81 @@
+Resumindo pra você:
+✅ Já vem:
+Git Plugin
+GitHub Plugin
+Pipeline Plugin
+Credentials Plugin
+
+❌ Precisa instalar:
+GitHub Branch Source
+Docker Plugin
+Docker Pipeline
+Docker Commons Plugin
+Credentials Binding Plugin
+Kubernetes Plugin
+Kubernetes CLI Plugin
+Pipeline: Kubernetes Steps
+Blue Ocean (opcional)
+######################################################################################
+
+Plugins que você realmente precisa instalar manualmente
+Esses normalmente não vêm por padrão e você precisa instalar:
+GitHub Branch Source → se for usar Multibranch Pipeline.
+Docker Plugin
+Docker Pipeline
+Docker Commons Plugin
+Credentials Binding Plugin (para senhas/tokens do DockerHub, GitHub, etc).
+Kubernetes Plugin
+Kubernetes CLI Plugin
+Pipeline: Kubernetes Steps
+(Opcional, mas recomendado) Blue Ocean Plugin para visualização bonita dos pipeline
+######################################################################################
+
+Resumo da lista final
+No mínimo, instale estes plugins:
+Git Plugin
+GitHub Plugin
+GitHub Branch Source
+Pipeline Plugin
+Docker Plugin
+Docker Pipeline
+Docker Commons Plugin
+Credentials Binding Plugin
+Kubernetes Plugin
+Kubernetes CLI Plugin
+Pipeline: Kubernetes Steps
+(Opcional: Blue Ocean Plugin para visualização).
+
+######################################################################################
+Resumo da lista final
+No mínimo, instale estes plugins:
+Git Plugin
+GitHub Plugin
+GitHub Branch Source
+Pipeline Plugin
+Docker Plugin
+Docker Pipeline
+Docker Commons Plugin
+Credentials Binding Plugin
+Kubernetes Plugin
+Kubernetes CLI Plugin
+Pipeline: Kubernetes Steps
+(Opcional: Blue Ocean Plugin para visualização).
+
+######################################################################################
+2. Pipeline do Zabbix + Grafana
+Fluxo típico:
+Clonar repositório GitHub com docker-compose ou Dockerfile.
+Build de múltiplas imagens (Docker Pipeline).
+Push das imagens para DockerHub.
+Deploy no Kubernetes (Zabbix + Grafana em namespace separado).
+Plugins necessários:
+✅ Mesmos do WordPress, mas aqui Kubernetes Plugin pode ser útil se quiser que Jenkins crie pods de agentes ou faça deploy diretamente via kubernetesDeploy.
+######################################################################################
+
+
+######################################################################################
+
+
+
+
+
