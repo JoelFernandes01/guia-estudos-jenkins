@@ -1,0 +1,4 @@
+Realizar o teste entre o host jenkins e o host docker 
+ssh ubuntu@docker-server.connect.local 'docker ps'
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
